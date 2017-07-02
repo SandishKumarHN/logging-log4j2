@@ -983,6 +983,7 @@ public class MemoryMappedFileManager extends ByteBufferDestinationManager implem
                 final long startNanos = System.nanoTime();
                 final MappedByteBuffer map = fileChannel.map(FileChannel.MapMode.READ_WRITE, start, size);
                 map.order(ByteOrder.nativeOrder());
+                MappedBufferTouch.touch(map);
 
                 final float millis = (float) ((System.nanoTime() - startNanos) / NANOS_PER_MILLISEC);
                 LOGGER.debug("MMapAppender remapped {} OK in {} millis", fileName, millis);
